@@ -1,17 +1,14 @@
 [
   {
     "id": "test1",
-    "sender": "lender1@example.com",
-    "body": "Dear Business Owner, your loan application has been declined due to insufficient credit history."
+    "body": "Kapitus\n\nOh no! Your submission has been declined.\n\nHotel Eubarks LLC\n\nContract ID: 16132561\n\nPartner: Thomas Chillemi\n\nDeclined For:\n\nHigh Competitor Balance"
   },
   {
     "id": "test2",
-    "sender": "lender2@example.com",
-    "body": "We regret to inform you that we cannot proceed with funding your request at this time."
+    "body": "Decline Notice. Unfortunately, we are not able to approve your file at this time for DOCUMENT DOCTORS LLC.\n\nThank you for choosing Everest Business Funding.\n\nReject Notice.\n\nUnfortunately, we are unable to process your submission at this time. This submission has been declined for:\n\n- Another ISO has already submitted this deal and it has been declined in the past 30 days\n- Inconsistent Deposits - too much fluctuation in amount from month to month\n\nIf you believe this submission has been declined in error, please send your questions to iso.support@ev-bf.com"
   },
   {
     "id": "test3",
-    "sender": "lender3@example.com",
-    "body": "Your request for financing has been reviewed and unfortunately, we cannot approve it due to low revenue."
+    "body": "Hi,\n\nPlease find below underwriting decline details for All Boys Academy Corporation\n\nStacking Rapidly - Excessive amount MCA fundings in short time\n\nMain:\n\n855-532-1969\n\nFax:\n\n855-532-1969\n\nEmail:\n\nuw@spartancapitalgroup.com\n\nWeb:\n\nspartancapitalgroup.com"
   }
 ]
