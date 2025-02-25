@@ -63,7 +63,7 @@ async function processEmails() {
         {
           business_name: businessName,
           lender_names: lenderName, // Ensure it's a single string
-          lender_email: lenderEmail,
+         // lender_email: lenderEmail,
           reason: declineReason,
         }
       ]);
