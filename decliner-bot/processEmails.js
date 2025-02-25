@@ -1,4 +1,5 @@
-const { fetchUnreadEmails, deleteEmail } = require("./gmailClient");
+const fs = require("fs");
+const path = require("path");
 const supabase = require("./supabaseClient");
 const { OpenAI } = require("openai");
 require("dotenv").config();
@@ -6,19 +7,22 @@ require("dotenv").config();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 async function processEmails() {
-  console.log("🔄 Checking for new unread emails...");
+  console.log("🔄 Running test classification using test file...");
 
-  const emails = await fetchUnreadEmails();
-  if (emails.length === 0) {
-    console.log("✅ No new unread emails.");
+  // ✅ Load test emails from file
+  const filePath = path.join(__dirname, "test_emails.json");
+  const testEmails = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+  if (testEmails.length === 0) {
+    console.log("✅ No test emails found.");
     return;
   }
 
-  for (const email of emails) {
-    console.log(`📩 Processing email from ${email.sender}...`);
+  for (const email of testEmails) {
+    console.log(`📩 Processing test email from ${email.sender}...`);
 
     try {
-      // ✅ Step 1: Ask OpenAI Assistant (Decliner)
+      // ✅ Step 1: Send Email to OpenAI Assistant (Decliner)
       const thread = await openai.beta.threads.create();
       await openai.beta.threads.messages.create(thread.id, { role: "user", content: email.body });
 
@@ -53,15 +57,14 @@ async function processEmails() {
       if (error) {
         console.error("❌ Failed to save decline:", error);
       } else {
-        console.log("✅ Decline saved successfully!");
+        console.log("✅ Test classification saved successfully!");
       }
 
-      // ✅ Step 3: Delete processed email
-      await deleteEmail(email.id);
     } catch (error) {
-      console.error(`❌ Error processing email from ${email.sender}:`, error);
+      console.error(`❌ Error processing test email:`, error);
     }
   }
 }
 
 module.exports = processEmails;
+
