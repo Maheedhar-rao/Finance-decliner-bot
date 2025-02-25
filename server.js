@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const processEmails = require("./decliner-bot/processEmails");
 const supabase = require("./decliner-bot/supabaseClient");
+const cron = require("node-cron");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,12 @@ app.get("/api/declined-businesses", async (req, res) => {
         console.error("Error fetching declined businesses:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
+});
+// ✅ Run Decliner Bot every 2 minutes
+cron.schedule("*/2 * * * *", async () => {
+  console.log("⏳ Running Decliner Bot...");
+  await processEmails();
+  console.log("✅ Decliner Bot Execution Completed!");
 });
 
 // ✅ Start Express Server
