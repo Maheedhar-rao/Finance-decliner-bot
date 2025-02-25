@@ -55,7 +55,7 @@ async function processEmails() {
       // ✅ Step 2: Handle Null Values
       const businessName = parsedData.business_name || "Unknown Business";
       const lenderName = parsedData.lender_name || "Unknown Lender";
-      const lenderEmail = parsedData.lender_email || "unknown@example.com";
+      //const lenderEmail = parsedData.lender_email || "unknown@example.com";
       const declineReason = parsedData.decline_reason || "No reason provided";
 
       // ✅ Step 3: Insert into Supabase
