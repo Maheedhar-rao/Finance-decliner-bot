@@ -1,0 +1,17 @@
+[
+  {
+    "id": "test1",
+    "sender": "lender1@example.com",
+    "body": "Dear Business Owner, your loan application has been declined due to insufficient credit history."
+  },
+  {
+    "id": "test2",
+    "sender": "lender2@example.com",
+    "body": "We regret to inform you that we cannot proceed with funding your request at this time."
+  },
+  {
+    "id": "test3",
+    "sender": "lender3@example.com",
+    "body": "Your request for financing has been reviewed and unfortunately, we cannot approve it due to low revenue."
+  }
+]
