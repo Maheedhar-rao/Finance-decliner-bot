@@ -24,7 +24,16 @@ async function processEmails() {
     try {
       // ✅ Step 1: Send Email to OpenAI Assistant (Decliner)
       const thread = await openai.beta.threads.create();
-      await openai.beta.threads.messages.create(thread.id, { role: "user", content: email.body });
+      //await openai.beta.threads.messages.create(thread.id, { role: "user", content: email.body });
+      await openai.beta.threads.messages.create(thread.id, {
+  role: "user",
+  content: `Analyze the following email and extract details: 
+
+  ${email.body}
+  
+  Return the response as JSON with fields: "lender_name", "lender_email", "business_name", and "decline_reason". Ensure correct formatting.`
+});
+
 
       const run = await openai.beta.threads.runs.create(thread.id, {
         assistant_id: process.env.ASSISTANT_ID,
