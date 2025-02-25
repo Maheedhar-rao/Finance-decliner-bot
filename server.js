@@ -7,34 +7,23 @@ const cron = require("node-cron");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ API to Manually Trigger the Decliner Bot
-app.post("/api/run-decliner", async (req, res) => {
-    try {
-        await processEmails();
-        res.json({ message: "Decliner Bot executed successfully!" });
-    } catch (error) {
-        console.error("Error running Decliner Bot:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+// ✅ Required: Dummy Route (Render Needs an Open Port)
+app.get("/", (req, res) => {
+    res.send("✅ Decliner Bot is running on Render!");
 });
 
-// ✅ API to Fetch Declined Businesses from Supabase
-app.get("/api/declined-businesses", async (req, res) => {
-    try {
-        const { data, error } = await supabase.from("declines").select("*");
-        if (error) throw error;
-        res.json(data);
-    } catch (error) {
-        console.error("Error fetching declined businesses:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
-// ✅ Run Decliner Bot every 2 minutes
+// ✅ Run Decliner Bot Every 2 Minutes (Keeps Running in Background)
 cron.schedule("*/2 * * * *", async () => {
   console.log("⏳ Running Decliner Bot...");
-  await processEmails();
-  console.log("✅ Decliner Bot Execution Completed!");
+  try {
+    await processEmails();
+    console.log("✅ Decliner Bot Execution Completed!");
+  } catch (error) {
+    console.error("❌ Error in Decliner Bot:", error);
+  }
 });
 
-// ✅ Start Express Server
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// ✅ Start Express Server (Required for Render)
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
